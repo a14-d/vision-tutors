@@ -3,267 +3,498 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-   <!-- Below links the Google Font -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <title>Vision Tutors — Coming Soon</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    min-height: 100vh;
-    background-color: #192d57;
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
+:root {
+  --white:   #F4F1EC;
+  --blue-mid: #9BACD8;
+  --orange:  #F98513;
+  --tan:     #DAD1C8;
+  --navy:    #223382;
+  --deep:    #111144;
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--deep);
+  color: var(--white);
+}
+
+/* ── Layout ── */
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Left panel ── */
+.left {
+  background: var(--navy);
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Decorative circle */
+.left::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 80px solid rgba(249, 133, 19, 0.12);
+  bottom: -120px;
+  left: -100px;
+  pointer-events: none;
+}
+
+.left::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 40px solid rgba(155, 172, 216, 0.1);
+  top: 60px;
+  right: -60px;
+  pointer-events: none;
+}
+
+.brand {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-wordmark {
+  font-size: 2.0rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1;
+}
+
+.brand-wordmark span {
+  color: var(--orange);
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.brand-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue-mid);
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+}
+
+.coming-soon-tag {
+  display: inline-block;
+  background: rgba(249, 133, 19, 0.15);
+  color: var(--orange);
+  border: 1px solid rgba(249, 133, 19, 0.3);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.75rem;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--white);
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.tagline {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--blue-mid);
+  max-width: 340px;
+  margin-bottom: 2.5rem;
+}
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.subject-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(155, 172, 216, 0.25);
+  color: var(--blue-mid);
+  letter-spacing: 0.02em;
+}
+
+.left-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(155, 172, 216, 0.12);
+  padding-top: 1.5rem;
+}
+
+.left-footer a {
+  font-size: 13px;
+  color: rgba(155, 172, 216, 0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.left-footer a:hover { color: var(--orange); }
+
+/* ── Right panel ── */
+.right {
+  background: var(--deep);
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.right-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(155,172,216,0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.right-footer .brand-dot { flex-shrink: 0; }
+
+.right::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34,51,130,0.35) 0%, transparent 70%);
+  top: -80px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.form-section {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+}
+
+.form-section h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.form-section p {
+  font-size: 0.9rem;
+  color: rgba(155,172,216,0.65);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(155,172,216,0.6);
+}
+
+.field label .opt {
+  font-size: 10px;
+  color: rgba(155,172,216,0.3);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.field input,
+.field select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(155,172,216,0.15);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.field input::placeholder { color: rgba(155,172,216,0.3); }
+
+.field input:focus,
+.field select:focus {
+  border-color: rgba(249,133,19,0.5);
+  background: rgba(249,133,19,0.04);
+}
+
+.field select {
+  color: rgba(155,172,216,0.45);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(155,172,216,0.4)' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.field select.picked { color: var(--white); }
+.field select option { background: #111144; color: #fff; }
+
+.btn {
+  margin-top: 6px;
+  padding: 14px;
+  background: var(--orange);
+  color: #111144;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover { background: #e0760e; }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.6; cursor: default; }
+
+.success {
+  display: none;
+  border: 1px solid rgba(249,133,19,0.25);
+  background: rgba(249,133,19,0.07);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.success .tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(249,133,19,0.15);
+  color: var(--orange);
+  font-size: 18px;
+  margin-bottom: 0.75rem;
+}
+
+.success h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.success p {
+  font-size: 13px;
+  color: var(--blue-mid);
+  line-height: 1.6;
+}
+
+.divider {
+  margin: 1.75rem 0;
+  border: none;
+  border-top: 1px solid rgba(155,172,216,0.1);
+}
+
+.privacy {
+  font-size: 11.5px;
+  color: rgba(155,172,216,0.35);
+  line-height: 1.6;
+}
+
+/* ── Mobile ── */
+@media (max-width: 720px) {
+  .page { grid-template-columns: 1fr; }
+
+  .left {
+    min-height: auto;
+    padding: 2.5rem 1.75rem;
+    gap: 2.5rem;
   }
 
-  .container {
-    width: 100%;
-    max-width: 540px;
-    text-align: center;
-  }
+  .left::before { width: 280px; height: 280px; bottom: -80px; left: -80px; }
 
-  .badge {
-    display: inline-block;
-    background: rgba(245, 166, 80, 0.15);
-    color: #f5a650;
-    border: 1px solid rgba(245, 166, 80, 0.35);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 2rem;
-  }
+  h1 { font-size: 2.4rem; }
 
-  .logo {
-    font-size: clamp(2.2rem, 6vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
-  }
+  .right { padding: 2.5rem 1.75rem; min-height: auto; }
 
-  .logo span {
-    color: #f5a650;
-  }
-
-  .tagline {
-    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 3rem;
-    line-height: 1.6;
-  }
-
-  .divider {
-    width: 40px;
-    height: 2px;
-    background: #f5a650;
-    margin: 0 auto 3rem;
-    border-radius: 2px;
-  }
-
-  .form-heading {
-    font-size: 1rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 1.25rem;
-  }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: left;
-  }
-
-  .form input,
-  .form select {
-    width: 100%;
-    padding: 13px 16px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 15px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-
-  .form input::placeholder { color: rgba(255,255,255,0.35); }
-
-  .form input:focus,
-  .form select:focus {
-    border-color: rgba(245, 166, 80, 0.6);
-  }
-
-  .form select {
-    color: rgba(255,255,255,0.6);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    cursor: pointer;
-  }
-
-  .form select option {
-    background: #0f1e3d;
-    color: #ffffff;
-  }
-
-  .form select.selected { color: #ffffff; }
-
-  .optional-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    margin-left: 4px;
-  }
-
-  .field-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 5px;
-    display: block;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 14px;
-    background: #f5a650;
-    color: #0f1e3d;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: inherit;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 4px;
-  }
-
-  .btn:hover { background: #f0952e; }
-  .btn:active { transform: scale(0.98); }
-
-  .success {
-    display: none;
-    background: rgba(245, 166, 80, 0.1);
-    border: 1px solid rgba(245, 166, 80, 0.3);
-    border-radius: 10px;
-    padding: 1.25rem;
-    color: #f5a650;
-    font-size: 15px;
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  .contact {
-    margin-top: 2.5rem;
-    font-size: 13px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .contact a {
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .contact a:hover { color: #f5a650; }
-
-  @media (max-width: 480px) {
-    body { padding: 2rem 1.25rem; }
-  }
+  .form-section { max-width: 100%; }
+}
 </style>
 </head>
 <body>
 
-<div class="container">
+<div class="page">
 
-  <div class="badge">Coming Soon</div>
-
-  <h1 class="logo">Vision <span>Tutors</span></h1>
-  <p class="tagline">Expert GCSE &amp; A-Level Mathematics tutoring.<br>Helping students reach their full potential.</p>
-
-  <div class="divider"></div>
-
-  <p class="form-heading">Register Your Interest</p>
-
-  <form class="form" id="interestForm" action="https://formspree.io/f/xlgklvev" method="POST">
-
-    <div>
-      <label class="field-label" for="email">Email address</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+  <!-- Left Panel -->
+  <div class="left">
+    <div class="brand">
+      <div class="brand-wordmark">Vision <span>Tutors</span></div>
     </div>
 
-    <div>
-      <label class="field-label" for="name">Your name <span class="optional-label">optional</span></label>
-      <input type="text" id="name" name="name" placeholder="e.g. Sarah Smith" />
+    <div class="main-content">
+      <div class="coming-soon-tag">Coming Soon</div>
+      <h1>Unlock your<br>academic <em>potential.</em></h1>
+      <p class="tagline">Expert, personalised tutoring for GCSE &amp; A-Level Mathematics — from tutors who genuinely care about your progress.</p>
+      <div class="subjects">
+        <span class="subject-tag">GCSE Mathematics</span>
+        <span class="subject-tag">A-Level Mathematics</span>
+        <span class="subject-tag">11+ Preparation</span>
+        <span class="subject-tag">Primary School Maths</span>
+
+      </div>
     </div>
 
-    <div>
-      <label class="field-label" for="subject">Subject of interest <span class="optional-label">optional</span></label>
-      <select id="subject" name="subject" onchange="this.classList.add('selected')">
-        <option value="" disabled selected>Select a subject...</option>
-        <option>GCSE Mathematics</option>
-        <option>A-Level Mathematics</option>
-        <option>11+ Preparation</option>
-        <option>Primary School Maths</option>
-        <option>Other / Not sure yet</option>
-      </select>
+    <div class="left-footer">
+      <a href="mailto:hello@vision-tutors.co.uk">hello@vision-tutors.co.uk</a>
     </div>
-
-    <button type="submit" class="btn">Register my interest</button>
-
-  </form>
-
-  <div class="success" id="successMsg">
-    ✓ &nbsp;Thanks for registering! We'll be in touch as soon as we launch.
   </div>
 
-  <p class="contact">Questions? Email us at <a href="mailto:hello@vision-tutors.co.uk">hello@vision-tutors.co.uk</a></p>
+  <!-- Right Panel -->
+  <div class="right">
+    <div></div>
+    <div class="form-section">
+      <h2>Register Your Interest</h2>
+      <p>Be the first to hear when we launch. We'll be in touch with further information.</p>
+
+      <form class="form" id="interestForm" action="https://formspree.io/f/xlgklvev" method="POST">
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="name">Full name <span class="opt">optional</span></label>
+          <input type="text" id="name" name="name" placeholder="e.g. Sarah Smith" />
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject of interest <span class="opt">optional</span></label>
+          <select id="subject" name="subject" onchange="this.classList.add('picked')">
+            <option value="" disabled selected>Select a subject...</option>
+            <option>GCSE Mathematics</option>
+            <option>A-Level Mathematics</option>
+            <option>11+ Preparation</option>
+            <option>Primary School Maths</option>
+            <option>Other / Not sure yet</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Register my interest</button>
+
+      </form>
+
+      <div class="success" id="successMsg">
+        <div class="tick">✓</div>
+        <h3>You're on the list!</h3>
+        <p>Thanks for registering. We'll reach out as soon as Vision Tutors is live.</p>
+      </div>
+
+      <hr class="divider">
+      <p class="privacy">We'll only use your email to contact you about your enquiry. No spam, ever.</p>
+    </div>
+    <div class="right-footer">
+      <span class="brand-dot"></span>
+      <span class="brand-label">Vision Tutors</span>
+    </div>
+  </div>
 
 </div>
 
 <script>
-  const form = document.getElementById('interestForm');
-  const success = document.getElementById('successMsg');
+const form = document.getElementById('interestForm');
+const success = document.getElementById('successMsg');
+const btn = document.getElementById('submitBtn');
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = form.querySelector('.btn');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
 
-      if (res.ok) {
-        form.style.display = 'none';
-        success.style.display = 'block';
-      } else {
-        btn.textContent = 'Something went wrong — try again';
-        btn.disabled = false;
-      }
-    } catch {
+    if (res.ok) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } else {
       btn.textContent = 'Something went wrong — try again';
       btn.disabled = false;
     }
-  });
+  } catch {
+    btn.textContent = 'Something went wrong — try again';
+    btn.disabled = false;
+  }
+});
 </script>
 
 </body>
