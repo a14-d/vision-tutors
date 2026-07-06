@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-<title>Vision Tutors — Coming Soon</title>
+<title>Vision Tutors — Register Your Interest</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -300,6 +300,86 @@ h1 em {
 .field select.picked { color: var(--white); }
 .field select option { background: #111144; color: #fff; }
 
+/* ── Contact toggle ── */
+.contact-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(155,172,216,0.15);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.contact-toggle button {
+  flex: 1;
+  padding: 9px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: rgba(155,172,216,0.5);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.02em;
+}
+
+.contact-toggle button.active {
+  background: var(--orange);
+  color: #111144;
+}
+
+/* ── Subject chips ── */
+.chips-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(155,172,216,0.6);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.chip {
+  padding: 7px 13px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(155,172,216,0.18);
+  border-radius: 100px;
+  color: rgba(155,172,216,0.65);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: rgba(249,133,19,0.4);
+  color: var(--white);
+}
+
+.chip.selected {
+  background: rgba(249,133,19,0.15);
+  border-color: rgba(249,133,19,0.55);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.chips-hint {
+  font-size: 11px;
+  color: rgba(155,172,216,0.3);
+  margin-top: 7px;
+}
+
 .btn {
   margin-top: 6px;
   padding: 14px;
@@ -360,10 +440,22 @@ h1 em {
   border-top: 1px solid rgba(155,172,216,0.1);
 }
 
-.privacy {
+.endmessage {
   font-size: 11.5px;
   color: rgba(155,172,216,0.35);
   line-height: 1.6;
+}
+
+.endmessage a {
+  font-family: inherit;
+  font-size: 14px;
+  color: rgba(155, 172, 216, 0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.endmessage a:hover {
+  color: var(--orange);
 }
 
 /* ── Mobile ── */
@@ -397,14 +489,15 @@ h1 em {
     </div>
 
     <div class="main-content">
-      <div class="coming-soon-tag">Coming Soon</div>
+
       <h1>Unlock your<br>academic <em>potential.</em></h1>
-      <p class="tagline">Expert, personalised tutoring for GCSE &amp; A-Level Mathematics — from tutors who genuinely care about your progress.</p>
+      <p class="tagline">Expert, personalised tutoring from tutors who genuinely care about your progress.</p>
       <div class="subjects">
-        <span class="subject-tag">GCSE Mathematics</span>
-        <span class="subject-tag">A-Level Mathematics</span>
+        <span class="subject-tag">Key Stage 2 </span>
+        <span class="subject-tag">Key Stage 3 </span>
+        <span class="subject-tag">GCSE </span>
+        <span class="subject-tag">A-Level </span>
         <span class="subject-tag">11+ Preparation</span>
-        <span class="subject-tag">Primary School Maths</span>
 
       </div>
     </div>
@@ -419,30 +512,54 @@ h1 em {
     <div></div>
     <div class="form-section">
       <h2>Register Your Interest</h2>
-      <p>Be the first to hear when we launch. We'll be in touch with further information.</p>
+      <p>We'll be in touch soon with further information.</p>
 
       <form class="form" id="interestForm" action="https://formspree.io/f/xlgklvev" method="POST">
 
+        <!-- Contact preference toggle -->
         <div class="field">
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          <label>Preferred contact method</label>
+          <div class="contact-toggle">
+            <button type="button" class="active" id="toggleEmail" onclick="switchContact('email')">Email</button>
+            <button type="button" id="togglePhone" onclick="switchContact('phone')">Phone</button>
+          </div>
         </div>
 
+        <!-- Email field -->
+        <div class="field" id="emailField">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" />
+        </div>
+
+        <!-- Phone field -->
+        <div class="field" id="phoneField" style="display:none;">
+          <label for="phone">Phone number <span class="opt">incl. country code </span></label>
+          <input type="tel" id="phone" name="phone" placeholder="e.g. +447700 900123" />
+        </div>
+
+        <!-- Hidden field to track contact method -->
+        <input type="hidden" name="contact_method" id="contactMethodInput" value="email" />
+
+        <!-- Full name -->
         <div class="field">
           <label for="name">Full name <span class="opt">optional</span></label>
           <input type="text" id="name" name="name" placeholder="e.g. Sarah Smith" />
         </div>
 
-        <div class="field">
-          <label for="subject">Subject of interest <span class="opt">optional</span></label>
-          <select id="subject" name="subject" onchange="this.classList.add('picked')">
-            <option value="" disabled selected>Select a subject...</option>
-            <option>GCSE Mathematics</option>
-            <option>A-Level Mathematics</option>
-            <option>11+ Preparation</option>
-            <option>Primary School Maths</option>
-            <option>Other / Not sure yet</option>
-          </select>
+        <!-- Subject chips -->
+        <div>
+          <span class="chips-label">Subjects of interest <span class="opt" style="text-transform:none;letter-spacing:0;font-size:10px;color:rgba(155,172,216,0.3);font-weight:400;">optional</span></span>
+          <div class="chips" id="chipsContainer">
+            <button type="button" class="chip" data-subject="KS2 Mathematics">KS2 Mathematics</button>
+            <button type="button" class="chip" data-subject="KS2 English">KS2 English</button>
+            <button type="button" class="chip" data-subject="GCSE Mathematics">GCSE Mathematics</button>
+            <button type="button" class="chip" data-subject="GCSE English">GCSE English</button>
+            <button type="button" class="chip" data-subject="GCSE Science">GCSE Science</button>
+            <button type="button" class="chip" data-subject="A-Level Mathematics">A-Level Mathematics</button>
+            <button type="button" class="chip" data-subject="11+ Preparation">11+ Preparation</button>
+          </div>
+          <p class="chips-hint">Select all that apply</p>
+          <input type="hidden" name="subjects" id="subjectsInput" value="" />
         </div>
 
         <button type="submit" class="btn" id="submitBtn">Register my interest</button>
@@ -451,12 +568,12 @@ h1 em {
 
       <div class="success" id="successMsg">
         <div class="tick">✓</div>
-        <h3>You're on the list!</h3>
-        <p>Thanks for registering. We'll reach out as soon as Vision Tutors is live.</p>
+        <h3>We've got you!</h3>
+        <p>Thanks for registering. We'll reach out soon, <br> Vision Tutors.</p>
       </div>
 
       <hr class="divider">
-      <p class="privacy">We'll only use your email to contact you about your enquiry. No spam, ever.</p>
+      <p class="endmessage">Alternatively, Email us at <a href="mailto:hello@vision-tutors.co.uk">hello@vision-tutors.co.uk</a></p>
     </div>
     <div class="right-footer">
       <span class="brand-dot"></span>
@@ -471,6 +588,49 @@ const form = document.getElementById('interestForm');
 const success = document.getElementById('successMsg');
 const btn = document.getElementById('submitBtn');
 
+/* ── Contact toggle ── */
+function switchContact(type) {
+  const emailField = document.getElementById('emailField');
+  const phoneField = document.getElementById('phoneField');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const methodInput = document.getElementById('contactMethodInput');
+
+  document.getElementById('toggleEmail').classList.toggle('active', type === 'email');
+  document.getElementById('togglePhone').classList.toggle('active', type === 'phone');
+
+  if (type === 'email') {
+    emailField.style.display = '';
+    phoneField.style.display = 'none';
+    emailInput.required = true;
+    phoneInput.required = false;
+  } else {
+    emailField.style.display = 'none';
+    phoneField.style.display = '';
+    emailInput.required = false;
+    phoneInput.required = true;
+  }
+  methodInput.value = type;
+}
+
+// Set initial state
+switchContact('email');
+
+/* ── Subject chips ── */
+const chips = document.querySelectorAll('.chip');
+const subjectsInput = document.getElementById('subjectsInput');
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('selected');
+    const selected = [...chips]
+      .filter(c => c.classList.contains('selected'))
+      .map(c => c.dataset.subject);
+    subjectsInput.value = selected.join(', ');
+  });
+});
+
+/* ── Form submit ── */
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   btn.textContent = 'Sending...';
